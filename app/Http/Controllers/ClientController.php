@@ -69,7 +69,7 @@ class ClientController extends Controller
 
     public function sendMessage($chat_id, $text)
     {
-        $token = "5940983546:AAFQ7g6gL_r6Tp6LG1je1fkMXHZbja9RBsk";
+        $token = "5839467716:AAFZLmO_BB9XTuws32wvj72q299PhEsXJLQ";
 
         $params = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=" . $text . "&parse_mode=html";
 
