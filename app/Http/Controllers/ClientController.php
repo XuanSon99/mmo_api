@@ -39,7 +39,7 @@ class ClientController extends Controller
             'phone' => $request->phone,
             'username' => $request->username,
             'ip_address' => $request->ip_address,
-            'username' => $request->username,
+            'fb_link' => $request->fb_link,
             'kyc' => 'pending',
             'front_photo' => str_replace("public", "", $front_photo),
             'back_photo' => str_replace("public", "", $back_photo),
@@ -47,7 +47,7 @@ class ClientController extends Controller
         ]);
         $data->save();
 
-        $text = "<b>🎉 Gửi yêu cầu KYC thành công!</b>%0A%0ALiên hệ @mrstorm để tham gia nhóm";
+        $text = "<b>🎉 Gửi yêu cầu KYC thành công!</b>%0A%0ALiên hệ @stormmr để tham gia nhóm";
         $this->sendMessage($request->chat_id, $text);
 
         $chat_id = "-1001649021081";
@@ -59,7 +59,7 @@ class ClientController extends Controller
 
     public function addCaptcha(Request $request)
     {
-        $text = "<b>🎉 Xác minh thành công!</b>%0A%0ALiên hệ @mrstorm để tham gia nhóm";
+        $text = "<b>🎉 Xác minh thành công!</b>%0A%0ALiên hệ @stormmr để tham gia nhóm";
         $this->sendMessage($request->chat_id, $text);
 
         $chat_id = "-1001649021081";
