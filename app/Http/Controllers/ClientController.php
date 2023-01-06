@@ -17,7 +17,7 @@ class ClientController extends Controller
     public function checkUser(Request $request)
     {
         $username = $request->route('username');
-        return Client::where('username', $username)->select('kyc','transaction','reputation ')->first();
+        return Client::where('username', $username)->select('kyc','transaction','reputation')->first();
     }
 
     public function addKyc(Request $request)
