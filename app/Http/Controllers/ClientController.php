@@ -17,7 +17,7 @@ class ClientController extends Controller
     public function checkUser(Request $request)
     {
         $username = $request->route('username');
-        return Client::where('username', $username)->select('kyc','transaction')->first();
+        return Client::where('username', $username)->select('kyc','transaction','reputation ')->first();
     }
 
     public function addKyc(Request $request)
@@ -40,6 +40,7 @@ class ClientController extends Controller
             'username' => $request->username,
             'ip_address' => $request->ip_address,
             'fb_link' => $request->fb_link,
+            'chat_id' => $request->chat_id,
             'kyc' => 'pending',
             'front_photo' => str_replace("public", "", $front_photo),
             'back_photo' => str_replace("public", "", $back_photo),
@@ -47,7 +48,7 @@ class ClientController extends Controller
         ]);
         $data->save();
 
-        $text = "<b>🎉 Gửi yêu cầu KYC thành công!</b>%0A%0ALiên hệ @stormmr để tham gia nhóm";
+        $text = "<b>🎉 Gửi yêu cầu KYC thành công!</b>%0A%0ALiên hệ @quocusdt để tham gia nhóm";
         $this->sendMessage($request->chat_id, $text);
 
         $chat_id = "-1001649021081";
@@ -59,7 +60,7 @@ class ClientController extends Controller
 
     public function addCaptcha(Request $request)
     {
-        $text = "<b>🎉 Xác minh thành công!</b>%0A%0ALiên hệ @stormmr để tham gia nhóm";
+        $text = "<b>🎉 Xác minh thành công!</b>%0A%0ALiên hệ @quocusdt để tham gia nhóm";
         $this->sendMessage($request->chat_id, $text);
 
         $chat_id = "-1001649021081";
@@ -69,7 +70,7 @@ class ClientController extends Controller
 
     public function sendMessage($chat_id, $text)
     {
-        $token = "5839467716:AAFZLmO_BB9XTuws32wvj72q299PhEsXJLQ";
+        $token = "5960653063:AAHyOV3a4nndUwSyXc0Vkrh8Dq87LZ3dh00";
 
         $params = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=" . $text . "&parse_mode=html";
 
