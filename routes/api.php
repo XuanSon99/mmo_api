@@ -22,3 +22,19 @@ Route::post('kyc', 'App\Http\Controllers\ClientController@addKyc');
 Route::post('captcha', 'App\Http\Controllers\ClientController@addCaptcha');
 Route::get('get-top', 'App\Http\Controllers\ClientController@getTop');
 Route::get('check-user/{username}', 'App\Http\Controllers\ClientController@checkUser');
+
+
+Route::group([
+    'prefix' => 'admin'
+], function () {
+    Route::post('login', 'App\Http\Controllers\AdminController@login');
+});
+
+Route::group([
+    'middleware' => 'auth:admin'
+], function () {
+    Route::resource('admin', 'App\Http\Controllers\AdminController');
+    Route::resource('client', 'App\Http\Controllers\ClientController');
+    Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
+    Route::post('send-message', 'App\Http\Controllers\ClientController@sendMessWithBot');
+});

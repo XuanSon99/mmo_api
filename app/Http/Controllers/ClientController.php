@@ -9,6 +9,34 @@ use Illuminate\Support\Facades\Http;
 
 class ClientController extends Controller
 {
+
+    public function index()
+    {
+        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at')->get();
+    }
+
+    public function update(Request $request, Client $Client)
+    {
+        $Client->update($request->all());
+        return response()->json(["status" => true], 200);
+    }
+
+    public function destroy(Client $Client)
+    {
+        $text = "Yêu cầu KYC của bạn đã không thành công. Vui lòng KYC lại!";
+        $this->sendMessage($Client->chat_id, $text);
+
+        $Client->delete();
+        return response()->json(["status" => true], 200);
+    }
+
+    public function getUserInfo(Request $request)
+    {
+        $username = $request->route('username');
+        $info = Client::where("username", $username)->first();
+        return $info;
+    }
+
     public function getTop()
     {
         return Client::orderBy('transaction', 'DESC')->where('transaction', '>', 0)->paginate(2);
@@ -17,7 +45,7 @@ class ClientController extends Controller
     public function checkUser(Request $request)
     {
         $username = $request->route('username');
-        return Client::where('username', $username)->select('kyc','transaction','reputation')->first();
+        return Client::where('username', $username)->select('kyc', 'transaction', 'reputation')->first();
     }
 
     public function addKyc(Request $request)
@@ -39,8 +67,9 @@ class ClientController extends Controller
             'phone' => $request->phone,
             'username' => $request->username,
             'ip_address' => $request->ip_address,
-            'fb_link' => $request->fb_link,
             'chat_id' => $request->chat_id,
+            'reputation' => "no",
+            'transaction' => 0,
             'kyc' => 'pending',
             'front_photo' => str_replace("public", "", $front_photo),
             'back_photo' => str_replace("public", "", $back_photo),
@@ -78,5 +107,11 @@ class ClientController extends Controller
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
         ])->get($params);
+    }
+
+    public function sendMessWithBot(Request $request)
+    {
+        $this->sendMessage($request->chat_id, $request->content);
+        return response()->json(["status" => true], 200);
     }
 }
