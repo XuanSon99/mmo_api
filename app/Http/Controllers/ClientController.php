@@ -12,7 +12,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at')->get();
+        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at','chat_id')->get();
     }
 
     public function update(Request $request, Client $Client)
