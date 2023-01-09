@@ -30,10 +30,11 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
+Route::resource('admin', 'App\Http\Controllers\AdminController');
+
 Route::group([
     'middleware' => 'auth:admin'
 ], function () {
-    Route::resource('admin', 'App\Http\Controllers\AdminController');
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
     Route::post('send-message', 'App\Http\Controllers\ClientController@sendMessWithBot');
