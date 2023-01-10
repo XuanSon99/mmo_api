@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Validator;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class ClientController extends Controller
@@ -12,7 +13,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at','chat_id')->get();
+        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at','chat_id','reputation')->get();
     }
 
     public function update(Request $request, Client $Client)
@@ -39,7 +40,7 @@ class ClientController extends Controller
 
     public function getTop()
     {
-        return Client::orderBy('transaction', 'DESC')->where('transaction', '>', 0)->paginate(2);
+        return Client::orderBy('transaction', 'DESC')->where('transaction', '>', 0)->paginate(10);
     }
 
     public function checkUser(Request $request)
@@ -113,5 +114,13 @@ class ClientController extends Controller
     {
         $this->sendMessage($request->chat_id, $request->content);
         return response()->json(["status" => true], 200);
+    }
+
+    public function getOverview()
+    {
+        $list = new \stdClass();
+        $list->new_user = Client::whereDate('created_at', Carbon::today())->count();
+        $list->total_user = Client::All()->count();
+        return $list;
     }
 }

@@ -36,6 +36,7 @@ Route::group([
     'middleware' => 'auth:admin'
 ], function () {
     Route::resource('client', 'App\Http\Controllers\ClientController');
+    Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
     Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
     Route::post('send-message', 'App\Http\Controllers\ClientController@sendMessWithBot');
 });
