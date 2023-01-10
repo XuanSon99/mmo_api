@@ -40,7 +40,7 @@ class ClientController extends Controller
 
     public function getTop()
     {
-        return Client::orderBy('transaction', 'DESC')->where('transaction', '>', 0)->paginate(10);
+        return Client::orderBy('transaction', 'DESC')->where('transaction', '>', 0)->paginate(5);
     }
 
     public function checkUser(Request $request)
