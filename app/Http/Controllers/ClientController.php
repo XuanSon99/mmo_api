@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use stdClass;
 
 class ClientController extends Controller
 {
 
     public function index()
     {
-        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at','chat_id','reputation')->get();
+        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at', 'chat_id', 'reputation')->get();
     }
 
     public function update(Request $request, Client $Client)
@@ -78,7 +79,7 @@ class ClientController extends Controller
         ]);
         $data->save();
 
-        $text = "<b>🎉 Gửi yêu cầu KYC thành công!</b>%0A%0ALiên hệ @QuocPham_OTC để tham gia nhóm";
+        $text = "<b>🎉 Gửi yêu cầu KYC thành công!</b>%0A%0ALiên hệ @ChoOTCVN_support để tham gia nhóm";
         $this->sendMessage($request->chat_id, $text);
 
         $chat_id = "-1001649021081";
@@ -90,7 +91,7 @@ class ClientController extends Controller
 
     public function addCaptcha(Request $request)
     {
-        $text = "<b>🎉 Xác minh thành công!</b>%0A%0ALiên hệ @QuocPham_OTC để tham gia nhóm";
+        $text = "<b>🎉 Xác minh thành công!</b>%0A%0ALiên hệ @ChoOTCVN_support để tham gia nhóm";
         $this->sendMessage($request->chat_id, $text);
 
         $chat_id = "-1001649021081";
@@ -122,5 +123,52 @@ class ClientController extends Controller
         $list->new_user = Client::whereDate('created_at', Carbon::today())->count();
         $list->total_user = Client::All()->count();
         return $list;
+    }
+
+    public function getPrice(Request $request)
+    {
+        $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
+        $type = $request->route('type');
+
+        $data = [
+            'asset' => 'USDT',
+            'fiat' => 'VND',
+            'merchantCheck' => true,
+            'page' => 1,
+            'publisherType' => null,
+            'rows' => 1,
+            'tradeType' => $type,
+        ];
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->post($param, $data);
+
+        return $response;
+    }
+
+    public function getCoinList()
+    {
+        $param = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false';
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->get($param);
+
+        return $response;
+    }
+
+    public function getCurrencyList()
+    {
+        $param = 'https://openexchangerates.org/api/latest.json?app_id=754f6dd941404595ae483630201b04cf';
+        
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->get($param);
+
+        return $response;
     }
 }

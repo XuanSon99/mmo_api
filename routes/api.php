@@ -22,6 +22,9 @@ Route::post('kyc', 'App\Http\Controllers\ClientController@addKyc');
 Route::post('captcha', 'App\Http\Controllers\ClientController@addCaptcha');
 Route::get('get-top', 'App\Http\Controllers\ClientController@getTop');
 Route::get('check-user/{username}', 'App\Http\Controllers\ClientController@checkUser');
+Route::get('p2p/{type}', 'App\Http\Controllers\ClientController@getPrice');
+Route::get('coins', 'App\Http\Controllers\ClientController@getCoinList');
+Route::get('currencies', 'App\Http\Controllers\ClientController@getCurrencyList');
 
 
 Route::group([
