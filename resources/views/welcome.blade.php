@@ -11,11 +11,11 @@
     <link rel="icon" href="/img/logo.png">
     <title>Chợ OTC Việt Nam</title>
     <link href="/css/chunk-a54b3e78.ee068850.css" rel="prefetch">
-    <link href="/js/chunk-1e2a9846.b4eff5c3.js" rel="prefetch">
+    <link href="/js/chunk-1e2a9846.dbbd266f.js" rel="prefetch">
     <link href="/js/chunk-a54b3e78.3155fe4a.js" rel="prefetch">
     <link href="/css/app.99425ca3.css" rel="preload" as="style">
     <link href="/css/chunk-vendors.adf0cae2.css" rel="preload" as="style">
-    <link href="/js/app.8b96c34c.js" rel="preload" as="script">
+    <link href="/js/app.bc68d443.js" rel="preload" as="script">
     <link href="/js/chunk-vendors.fc952368.js" rel="preload" as="script">
     <link href="/css/chunk-vendors.adf0cae2.css" rel="stylesheet">
     <link href="/css/app.99425ca3.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 <body>
     <div id="app"></div>
     <script src="/js/chunk-vendors.fc952368.js"></script>
-    <script src="/js/app.8b96c34c.js"></script>
+    <script src="/js/app.bc68d443.js"></script>
 </body>
 
 </html>
