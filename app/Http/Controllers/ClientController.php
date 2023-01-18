@@ -162,7 +162,8 @@ class ClientController extends Controller
 
     public function getCurrencyList()
     {
-        $param = 'https://openexchangerates.org/api/latest.json?app_id=754f6dd941404595ae483630201b04cf';
+        // $param = 'https://openexchangerates.org/api/latest.json?app_id=754f6dd941404595ae483630201b04cf';
+        $param = 'https://tygiado.com/wp-admin/admin-ajax.php?action=load_embed_currency&bank=';
         
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
