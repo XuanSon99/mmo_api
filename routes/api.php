@@ -25,6 +25,7 @@ Route::get('check-user/{username}', 'App\Http\Controllers\ClientController@check
 Route::get('p2p/{type}', 'App\Http\Controllers\ClientController@getPrice');
 Route::get('coins', 'App\Http\Controllers\ClientController@getCoinList');
 Route::get('currencies', 'App\Http\Controllers\ClientController@getCurrencyList');
+Route::get('exchanges', 'App\Http\Controllers\ClientController@getExchange');
 
 
 Route::group([

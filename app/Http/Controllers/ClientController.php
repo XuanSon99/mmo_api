@@ -160,6 +160,18 @@ class ClientController extends Controller
         return $response;
     }
 
+    public function getExchange()
+    {
+        $param = 'https://api.coingecko.com/api/v3/exchanges?per_page=20';
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->get($param);
+
+        return $response;
+    }
+
     public function getCurrencyList()
     {
         // $param = 'https://openexchangerates.org/api/latest.json?app_id=754f6dd941404595ae483630201b04cf';
