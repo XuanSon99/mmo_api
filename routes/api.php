@@ -34,11 +34,12 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
-Route::resource('admin', 'App\Http\Controllers\AdminController');
+Route::resource('exchange-group', 'App\Http\Controllers\GroupController');
 
 Route::group([
     'middleware' => 'auth:admin'
 ], function () {
+    Route::resource('admin', 'App\Http\Controllers\AdminController');
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
     Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
