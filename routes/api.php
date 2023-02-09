@@ -34,7 +34,7 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
-Route::resource('exchange-group', 'App\Http\Controllers\GroupController');
+Route::resource('group', 'App\Http\Controllers\GroupController');
 
 Route::group([
     'middleware' => 'auth:admin'
