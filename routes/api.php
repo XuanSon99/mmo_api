@@ -38,12 +38,12 @@ Route::resource('group', 'App\Http\Controllers\GroupController');
 Route::resource('posts', 'App\Http\Controllers\PostController');
 Route::resource('categories', 'App\Http\Controllers\CategoryController');
 Route::get('search', 'App\Http\Controllers\PostController@search');
-Route::resource('admin', 'App\Http\Controllers\AdminController');
+
 
 Route::group([
     'middleware' => 'auth:admin'
 ], function () {
-    
+    Route::resource('admin', 'App\Http\Controllers\AdminController');
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
     Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
