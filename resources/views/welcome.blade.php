@@ -15,10 +15,10 @@
     <link href="/js/chunk-05900bc2.00029b62.js" rel="prefetch">
     <link href="/js/chunk-2d217a99.814b44f4.js" rel="prefetch">
     <link href="/js/chunk-304b9ae3.4062764a.js" rel="prefetch">
-    <link href="/js/chunk-59e64ef3.9ce8e0b5.js" rel="prefetch">
+    <link href="/js/chunk-59e64ef3.2c82c08f.js" rel="prefetch">
     <link href="/css/app.76af4a86.css" rel="preload" as="style">
     <link href="/css/chunk-vendors.adf0cae2.css" rel="preload" as="style">
-    <link href="/js/app.42c8c190.js" rel="preload" as="script">
+    <link href="/js/app.e60f92dd.js" rel="preload" as="script">
     <link href="/js/chunk-vendors.1d187da9.js" rel="preload" as="script">
     <link href="/css/chunk-vendors.adf0cae2.css" rel="stylesheet">
     <link href="/css/app.76af4a86.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 <body>
     <div id="app"></div>
     <script src="/js/chunk-vendors.1d187da9.js"></script>
-    <script src="/js/app.42c8c190.js"></script>
+    <script src="/js/app.e60f92dd.js"></script>
 </body>
 
 </html>
