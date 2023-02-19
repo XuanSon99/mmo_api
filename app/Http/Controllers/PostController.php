@@ -37,6 +37,7 @@ class PostController extends Controller
             $list->image = $post->image;
             $list->slug = $post->slug;
             $list->title = $post->title;
+            $list->id = $post->id;
             array_push($data, $list);
         }
         return $data;
@@ -145,6 +146,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return response()->json(["status" => true], 200);
     }
 }
