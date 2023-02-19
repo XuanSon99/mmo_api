@@ -24,6 +24,7 @@ class CategoryController extends Controller
             $parent = Category::find($cate->parent_id);
             if (!is_null($parent)) {
                 $list->parent_slug = $parent->slug;
+                $list->id = $cate->id;
                 $list->name = $cate->name;
                 $list->slug = $cate->slug;
                 array_push($data, $list);
