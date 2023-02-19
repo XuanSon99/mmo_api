@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Validator;
 
 class PostController extends Controller
 {
@@ -63,7 +64,34 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'slug' => 'required|unique:posts'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["status" => false, "message" => ["Username đã tồn tại!"]], 400);
+        }
+
+        $image = $request->file('image')->store('public/images');
+
+        $data = new Post([
+            'author_id' => 1,
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'body' => $request->body,
+            'slug' => $request->slug,
+            'image' => str_replace("public", "", $image),
+            'featured' => $request->featured,
+            'status' => "PUBLISHED",
+        ]);
+        $data->save();
+
+        return response()->json(["status" => true, "message" => ["Thêm thành công!"]], 201);
+    }
+    public function uploadImage(Request $request)
+    {
+        $image = $request->file('image')->store('public/images');
+        return str_replace("public", "", $image);
     }
     /**
      * Display the specified resource.
