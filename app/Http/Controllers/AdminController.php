@@ -27,11 +27,17 @@ class AdminController extends Controller
 
         $data = new Admin([
             'username' => $request->username,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'rules' => $request->rules
         ]);
         $data->save();
 
         return response()->json(["status" => true, "message" => ["Thêm thành công!"]], 201);
+    }
+
+    public function getInfo(Admin $Admin)
+    {
+        return $Admin;
     }
 
     public function update(Request $request, Admin $Admin)

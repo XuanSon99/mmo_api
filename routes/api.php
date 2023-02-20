@@ -43,6 +43,7 @@ Route::get('search', 'App\Http\Controllers\PostController@search');
 Route::group([
     'middleware' => 'auth:admin'
 ], function () {
+    Route::get('admin-info', 'App\Http\Controllers\AdminController@getInfo');
     Route::resource('admin', 'App\Http\Controllers\AdminController');
     Route::post('upload', 'App\Http\Controllers\PostController@uploadImage');
     Route::resource('client', 'App\Http\Controllers\ClientController');
