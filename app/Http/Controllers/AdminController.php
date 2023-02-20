@@ -35,9 +35,11 @@ class AdminController extends Controller
         return response()->json(["status" => true, "message" => ["Thêm thành công!"]], 201);
     }
 
-    public function getInfo(Admin $Admin)
+    public function getInfo(Request $request)
     {
-        return $Admin;
+        $username = $request->route('username');
+        $info = Admin::where("username", $username)->first();
+        return $info;
     }
 
     public function update(Request $request, Admin $Admin)
@@ -80,6 +82,7 @@ class AdminController extends Controller
 
         return response()->json([
             'access_token' => $tokenResult->accessToken,
+            'username' => $request->username,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
