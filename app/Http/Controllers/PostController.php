@@ -34,7 +34,6 @@ class PostController extends Controller
             if (!is_null($cate)) $list->cate_name = $cate->name;
 
             $list->created_at = $post->created_at;
-            $list->category_id = $post->category_id;
             $list->image = $post->image;
             $list->slug = $post->slug;
             $list->title = $post->title;
@@ -116,6 +115,7 @@ class PostController extends Controller
         }
 
         $list->created_at = $post->created_at;
+        $list->category_id = $post->category_id;
         $list->body = $post->body;
         $list->excerpt = $post->excerpt;
         $list->image = $post->image;
