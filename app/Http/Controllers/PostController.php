@@ -34,6 +34,7 @@ class PostController extends Controller
             if (!is_null($cate)) $list->cate_name = $cate->name;
 
             $list->created_at = $post->created_at;
+            $list->category_id = $post->category_id;
             $list->image = $post->image;
             $list->slug = $post->slug;
             $list->title = $post->title;
@@ -135,7 +136,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post->update($request->all());
+        if ($request->file('image')) {
+            $image = $request->file('image')->store('public/images');
+            $post['image'] = str_replace("public", "", $image);
+        }
+        
+        $post->update($request->except('image'));
         return response()->json(["status" => true], 200);
     }
 
