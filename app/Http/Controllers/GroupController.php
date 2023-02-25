@@ -25,6 +25,7 @@ class GroupController extends Controller
 
         $data = new Group([
             'name' => $request->name,
+            'username' => $request->username,
             'group_id' => $request->group_id
         ]);
         $data->save();
