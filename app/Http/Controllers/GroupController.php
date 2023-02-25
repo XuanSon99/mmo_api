@@ -22,7 +22,7 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'group_id' => 'required|unique:groups'
+            'key' => 'required|unique:groups'
         ]);
 
         if ($validator->fails()) {

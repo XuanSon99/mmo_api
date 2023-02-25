@@ -42,7 +42,7 @@ Route::group([
 });
 
 Route::resource('group', 'App\Http\Controllers\GroupController');
-Route::get('group/{username}', 'App\Http\Controllers\GroupController@getGroupList');
+Route::get('groups/{username}', 'App\Http\Controllers\GroupController@getGroupList');
 Route::resource('posts', 'App\Http\Controllers\PostController');
 Route::resource('categories', 'App\Http\Controllers\CategoryController');
 Route::get('search', 'App\Http\Controllers\PostController@search');
