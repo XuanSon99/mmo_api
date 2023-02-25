@@ -13,6 +13,12 @@ class GroupController extends Controller
         return Group::orderBy('created_at', 'DESC')->get();
     }
 
+    public function getGroupList(Request $request)
+    {
+        $username = $request->route('username');
+        return Group::orderBy('created_at', 'DESC')->where('username', $username)->get();
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -26,6 +32,7 @@ class GroupController extends Controller
         $data = new Group([
             'name' => $request->name,
             'username' => $request->username,
+            'key' => $request->key,
             'group_id' => $request->group_id
         ]);
         $data->save();
