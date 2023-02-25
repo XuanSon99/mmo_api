@@ -177,13 +177,32 @@ class ClientController extends Controller
     public function getCurrencyList()
     {
         // $param = 'https://openexchangerates.org/api/latest.json?app_id=754f6dd941404595ae483630201b04cf';
-        $param = 'https://tygiado.com/wp-admin/admin-ajax.php?action=load_embed_currency&bank=';
-        
+        $param = 'https://portal.vietcombank.com.vn/UserControls/TVPortal.TyGia/pListTyGia.aspx';
+
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
         ])->get($param);
 
-        return $response;
+        $dom = new \DOMDocument;
+        $dom->loadHTML($response);
+
+        $finder = new \DomXPath($dom);
+        $table = $finder->query("//*[contains(@class, 'odd')]");
+
+        $data = array();
+
+        foreach ($table as $tr) {
+            $list = new \stdClass();
+            $td = $tr->getElementsByTagName('td');
+            $list->name = trim($td[0]->nodeValue, " ");
+            $list->code = $td[1]->nodeValue;
+            $list->buy = $td[2]->nodeValue;
+            $list->transfer = $td[3]->nodeValue;
+            $list->sell = $td[4]->nodeValue;
+            array_push($data, $list);
+        }
+
+        return $data;
     }
 }
