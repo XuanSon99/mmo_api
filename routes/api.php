@@ -24,11 +24,11 @@ Route::get('get-top', 'App\Http\Controllers\ClientController@getTop');
 Route::get('check-user/{username}', 'App\Http\Controllers\ClientController@checkUser');
 Route::get('p2p/{type}', 'App\Http\Controllers\RateController@getPrice');
 Route::get('exchanges', 'App\Http\Controllers\RateController@getExchange');
-
+Route::get('coins', 'App\Http\Controllers\RateController@getCoinList');
 Route::group([
     'prefix' => 'rate'
 ], function () {
-    Route::get('coins', 'App\Http\Controllers\RateController@getCoinList');
+    
     Route::get('bank', 'App\Http\Controllers\RateController@getBankPrice');
     Route::get('world', 'App\Http\Controllers\RateController@getWorldPrice');
     Route::get('gold', 'App\Http\Controllers\RateController@getGoldPrice');
