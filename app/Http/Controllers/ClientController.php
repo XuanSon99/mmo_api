@@ -14,7 +14,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at', 'chat_id', 'reputation')->get();
+        return Client::orderBy('created_at', 'DESC')->select('id', 'username', 'kyc', 'transaction', 'created_at', 'chat_id', 'reputation')->paginate(10);
     }
 
     public function update(Request $request, Client $Client)
