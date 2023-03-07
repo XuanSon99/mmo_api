@@ -7,6 +7,7 @@ use Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use stdClass;
+use Drnxloc\LaravelHtmlDom\HtmlDomParser;
 
 class RateController extends Controller
 {
@@ -91,12 +92,61 @@ class RateController extends Controller
 
     public function getGoldPrice()
     {
-        $param = 'https://api.rate68.com/api/exchange-rate/gold-price-v2';
+        $param = 'https://www.24h.com.vn/gia-vang-hom-nay-c425.html';
+        $dom = HtmlDomParser::file_get_html($param);
 
-        $json = json_decode(file_get_contents($param), true);
-        return $json;
+        $data = array();
+
+        foreach ($dom->find('.gia-vang-search-data-table tr') as $value) {
+            $list = new \stdClass();
+            $td = $value->find('td');
+            $list->name = trim($td[0]->text(), " ");
+            $list->buy = $td[1]->find('span', 0)->text();
+            $list->sell = $td[2]->find('span', 0)->text();
+            $list->old_buy = $td[3]->text();
+            $list->old_sell = $td[4]->text();
+            $list->buy_change = str_replace(",", "", $list->buy) - str_replace(",", "", $list->old_buy);
+            $list->sell_change = str_replace(",", "", $list->sell) - str_replace(",", "", $list->old_sell);
+
+            array_push($data, $list);
+        }
+        
+        return $data;
     }
-    
+
+    public function getMarketForce()
+    {
+        $param = 'http://taiem.vn/site/strong.html';
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->get($param);
+
+        $dom = new \DOMDocument;
+        @$dom->loadHTML($response);
+
+        $finder = new \DomXPath($dom);
+        $table = $finder->query("//*[contains(@class, 'type1')]");
+
+        $data = array();
+
+        $rate = $this->getWorldPrice();
+
+        foreach ($table as $key => $tr) {
+            $list = new \stdClass();
+            $th = $tr->getElementsByTagName('th');
+            $list->name = $th[0]->nodeValue;
+            $list->price = $rate[$key]['buy'];
+            $list->five_minutes = $th[2]->nodeValue;
+            $list->fifteen_minutes = $th[3]->nodeValue;
+            $list->one_hour = $th[4]->nodeValue;
+            array_push($data, $list);
+        }
+
+        return $data;
+    }
+
     public function getNicePrice()
     {
         $param = 'https://api.rate68.com/api/exchange-rate/nice-price';
@@ -110,6 +160,23 @@ class RateController extends Controller
         $param = 'https://api.rate68.com/api/exchange-rate/list-exchange?page=1&limit=10&sort=DESC&type=fiat_to_fiat&client_id=2';
 
         $json = json_decode(file_get_contents($param), true);
-        return $json;
+        $rate = $json['data']['data'];
+
+        $this->moveElement($rate, 1, 0);
+        $this->moveElement($rate, 4, 6);
+
+        foreach ($rate as $key => $value) {
+            if ($value['from'] == 'USD') {
+                $rate[$key]['buy'] = 1 / $value['buy'];
+            }
+        }
+
+        return $rate;
+    }
+
+    function moveElement(&$array, $a, $b)
+    {
+        $out = array_splice($array, $a, 1);
+        array_splice($array, $b, 0, $out);
     }
 }

@@ -28,11 +28,10 @@ Route::get('coins', 'App\Http\Controllers\RateController@getCoinList');
 Route::group([
     'prefix' => 'rate'
 ], function () {
-    
     Route::get('bank', 'App\Http\Controllers\RateController@getBankPrice');
     Route::get('world', 'App\Http\Controllers\RateController@getWorldPrice');
     Route::get('gold', 'App\Http\Controllers\RateController@getGoldPrice');
-    Route::get('nice-price', 'App\Http\Controllers\RateController@getNicePrice');
+    Route::get('market-force', 'App\Http\Controllers\RateController@getMarketForce');
 });
 
 Route::group([
