@@ -124,7 +124,8 @@ class RateController extends Controller
         ])->get($param);
 
         $dom = new \DOMDocument;
-        @$dom->loadHTML($response);
+        $html_data  = mb_convert_encoding($response , 'HTML-ENTITIES', 'UTF-8'); 
+        @$dom->loadHTML($html_data);
 
         $finder = new \DomXPath($dom);
         $table = $finder->query("//*[contains(@class, 'type1')]");
@@ -167,7 +168,7 @@ class RateController extends Controller
 
         foreach ($rate as $key => $value) {
             if ($value['from'] == 'USD') {
-                $rate[$key]['buy'] = 1 / $value['buy'];
+                $rate[$key]['buy'] = round(1 / $value['buy'], 5);
             }
         }
 
