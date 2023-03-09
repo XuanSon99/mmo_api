@@ -92,6 +92,20 @@ class RateController extends Controller
 
     public function getGoldPrice()
     {
+        $param = 'https://api.rate68.com/api/exchange-rate/gold-price-v2?client_id=2';
+
+        $json = json_decode(file_get_contents($param), true);
+        $rate = $json['data'];
+
+        foreach ($rate as $key => $value) {
+            if ($value['code'] != 'tg') {
+                $rate[$key]['buyingPrice'] =  $value['buyingPrice'] / 1000;
+                $rate[$key]['sellingPrice'] =  $value['sellingPrice'] / 1000;
+                $rate[$key]['sellChange'] =  $value['sellChange'] / 1000;
+                $rate[$key]['buyChange'] =  $value['buyChange'] / 1000;
+            }
+        }
+
         $param = 'https://www.24h.com.vn/gia-vang-hom-nay-c425.html';
         $dom = HtmlDomParser::file_get_html($param);
 
@@ -101,16 +115,49 @@ class RateController extends Controller
             $list = new \stdClass();
             $td = $value->find('td');
             $list->name = trim($td[0]->text(), " ");
-            $list->buy = $td[1]->find('span', 0)->text();
-            $list->sell = $td[2]->find('span', 0)->text();
-            $list->old_buy = $td[3]->text();
-            $list->old_sell = $td[4]->text();
-            $list->buy_change = str_replace(",", "", $list->buy) - str_replace(",", "", $list->old_buy);
-            $list->sell_change = str_replace(",", "", $list->sell) - str_replace(",", "", $list->old_sell);
+            $list->buy = str_replace(",", "", $td[1]->find('span', 0)->text());
+            $list->sell = str_replace(",", "", $td[2]->find('span', 0)->text());
+            $list->buy_change = $list->buy - str_replace(",", "", $td[3]->text());
+            $list->sell_change = $list->sell - str_replace(",", "", $td[4]->text());
 
             array_push($data, $list);
         }
-        
+
+        foreach ($rate as $value) {
+            if ($value['code'] != 'gold' && $value['code'] != 'change' && $value['code'] != 'dau') {
+                $list = new \stdClass();
+                $list->name = $value['name'];
+                $list->buy = $value['buyingPrice'];
+                $list->sell = $value['sellingPrice'];
+                $list->buy_change = round($value['sellChange'], 2);
+                $list->sell_change = round($value['buyChange'], 2);
+                array_push($data, $list);
+            }
+        }
+
+        $this->moveElement($data, 12, 0);
+
+        return $data;
+    }
+
+    public function getStockPrice()
+    {
+        $param = 'https://www.24h.com.vn/tin-chung-khoan-c566.html';
+        $dom = HtmlDomParser::file_get_html($param);
+
+        $data = array();
+
+        foreach ($dom->find('#ckthegioi .row') as $value) {
+            $list = new \stdClass();
+            $item = $value->find('.item');
+            $list->code = $item[0]->find('div', 0)->text();
+            $list->name = $item[0]->find('div', 1)->text();
+            $list->price = $item[1]->text();
+            $list->change = $item[2]->find('span', 0)->text();
+            $list->time = trim(str_replace($list->change, "", $item[2]->text()), " ");
+            array_push($data, $list);
+        }
+
         return $data;
     }
 
@@ -124,7 +171,7 @@ class RateController extends Controller
         ])->get($param);
 
         $dom = new \DOMDocument;
-        $html_data  = mb_convert_encoding($response , 'HTML-ENTITIES', 'UTF-8'); 
+        $html_data  = mb_convert_encoding($response, 'HTML-ENTITIES', 'UTF-8');
         @$dom->loadHTML($html_data);
 
         $finder = new \DomXPath($dom);

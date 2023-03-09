@@ -32,6 +32,7 @@ Route::group([
     Route::get('world', 'App\Http\Controllers\RateController@getWorldPrice');
     Route::get('gold', 'App\Http\Controllers\RateController@getGoldPrice');
     Route::get('market-force', 'App\Http\Controllers\RateController@getMarketForce');
+    Route::get('stock', 'App\Http\Controllers\RateController@getStockPrice');
 });
 
 Route::group([
