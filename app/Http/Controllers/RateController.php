@@ -14,16 +14,15 @@ class RateController extends Controller
     public function getPrice(Request $request)
     {
         $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
-        $type = $request->route('type');
-
+        
         $data = [
-            'asset' => 'USDT',
-            'fiat' => 'VND',
+            'asset' => $request->asset,
+            'fiat' => $request->fiat,
             'merchantCheck' => true,
             'page' => 1,
             'publisherType' => null,
             'rows' => 1,
-            'tradeType' => $type,
+            'tradeType' => $request->type,
         ];
 
         $response = Http::withHeaders([
