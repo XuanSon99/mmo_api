@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="">
+    <meta name="description" content="Website cập nhật tỷ giá & tin tức thị trường nhanh chóng, chính xác">
+    <meta property="og:image" content="https://chootc.com/storage/posts/March2023/7CP6yVirrT1juXNvvzNE.png">
+    <meta property="og:url" content="https://chootc.com">
     <link rel="icon" href="/img/logo.png">
     <title>Chợ OTC Việt Nam</title>
     <link href="/css/chunk-426e7fd5.ee068850.css" rel="prefetch">
