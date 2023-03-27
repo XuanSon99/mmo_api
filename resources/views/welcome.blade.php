@@ -22,7 +22,7 @@
     <link href="/js/chunk-cdc4c50e.6bdc6802.js" rel="prefetch">
     <link href="/css/app.b00786d8.css" rel="preload" as="style">
     <link href="/css/chunk-vendors.162fdd32.css" rel="preload" as="style">
-    <link href="/js/app.9b9e7586.js" rel="preload" as="script">
+    <link href="/js/app.4fa064bb.js" rel="preload" as="script">
     <link href="/js/chunk-vendors.d3d375fc.js" rel="preload" as="script">
     <link href="/css/chunk-vendors.162fdd32.css" rel="stylesheet">
     <link href="/css/app.b00786d8.css" rel="stylesheet">
@@ -31,7 +31,7 @@
 <body>
     <div id="app"></div>
     <script src="/js/chunk-vendors.d3d375fc.js"></script>
-    <script src="/js/app.9b9e7586.js"></script>
+    <script src="/js/app.4fa064bb.js"></script>
 </body>
 
 </html>
