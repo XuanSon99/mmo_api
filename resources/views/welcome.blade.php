@@ -31,12 +31,12 @@
     <link href="/js/chunk-73c343a5.8467e354.js" rel="prefetch">
     <link href="/js/chunk-b3a816b0.e9d7561f.js" rel="prefetch">
     <link href="/js/chunk-cdc4c50e.6bdc6802.js" rel="prefetch">
-    <link href="/css/app.fca29dec.css" rel="preload" as="style">
+    <link href="/css/app.31f5502e.css" rel="preload" as="style">
     <link href="/css/chunk-vendors.162fdd32.css" rel="preload" as="style">
     <link href="/js/app.0746b8df.js" rel="preload" as="script">
     <link href="/js/chunk-vendors.d3d375fc.js" rel="preload" as="script">
     <link href="/css/chunk-vendors.162fdd32.css" rel="stylesheet">
-    <link href="/css/app.fca29dec.css" rel="stylesheet">
+    <link href="/css/app.31f5502e.css" rel="stylesheet">
 </head>
 
 <body>
