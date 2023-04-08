@@ -26,7 +26,7 @@ class RateController extends Controller
         ];
 
         if($request->transAmount){
-            $data->transAmount = $request->transAmount
+            $data->transAmount = $request->transAmount;
         }
 
         $response = Http::withHeaders([
