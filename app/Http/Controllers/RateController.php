@@ -38,10 +38,12 @@ class RateController extends Controller
             $data->transAmount = $request->transAmount;
         }
 
+        $myArray[] = $data;
+
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
-        ])->post($param, $data);
+        ])->post($param, $myArray);
 
         return $response;
     }
