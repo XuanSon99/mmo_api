@@ -15,35 +15,25 @@ class RateController extends Controller
     {
         $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
         
-        // $data = [
-        //     'asset' => $request->asset,
-        //     'fiat' => $request->fiat,
-        //     'merchantCheck' => true,
-        //     'page' => 1,
-        //     'publisherType' => null,
-        //     'rows' => 6,
-        //     'tradeType' => $request->type,
-        // ];
+        $data = [
+            'asset' => $request->asset,
+            'fiat' => $request->fiat,
+            'merchantCheck' => true,
+            'page' => 1,
+            'publisherType' => null,
+            'rows' => 6,
+            'tradeType' => $request->type,
+        ];
 
-        $data = new \stdClass();
-        $data->asset = $request->asset;
-        $data->fiat = $request->fiat;
-        $data->merchantCheck = true;
-        $data->page = 1;
-        $data->publisherType = null;
-        $data->rows = 6;
-        $data->tradeType = $request->type;
 
         if($request->transAmount){
             $data->transAmount = $request->transAmount;
-        }
-
-        $myArray[] = $data;
+        } 
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
-        ])->post($param, $myArray);
+        ])->post($param, $data);
 
         return $response;
     }
