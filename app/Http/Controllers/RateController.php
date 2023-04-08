@@ -21,9 +21,13 @@ class RateController extends Controller
             'merchantCheck' => true,
             'page' => 1,
             'publisherType' => null,
-            'rows' => 5,
+            'rows' => 6,
             'tradeType' => $request->type,
         ];
+
+        if($request->transAmount){
+            $data->transAmount = $request->transAmount
+        }
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
