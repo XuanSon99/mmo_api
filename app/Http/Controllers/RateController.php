@@ -21,7 +21,7 @@ class RateController extends Controller
             'merchantCheck' => true,
             'page' => 1,
             'publisherType' => null,
-            'rows' => 16,
+            'rows' => 18,
             'tradeType' => $request->type,
         ];
 
