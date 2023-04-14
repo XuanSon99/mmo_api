@@ -19,9 +19,9 @@ class RateController extends Controller
             'asset' => $request->asset,
             'fiat' => $request->fiat,
             'merchantCheck' => true,
-            'page' => 1,
+            'page' => $request->page,
             'publisherType' => null,
-            'rows' => 18,
+            'rows' => 9,
             'tradeType' => $request->type,
         ];
 
