@@ -68,7 +68,7 @@ class CategoryController extends Controller
             $list->title = $post->title;
             array_push($data, $list);
         }
-        return response()->json(["status" => true, "data" =>  $data, "total" => Post::count()], 200);
+        return response()->json(["status" => true, "data" =>  $data, "total" => Post::where('category_id', $Category->id)->count()], 200);
     }
 
     /**

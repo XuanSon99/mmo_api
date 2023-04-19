@@ -52,7 +52,7 @@ class PostController extends Controller
             ->paginate(6);
         if (empty($posts[0])) {
             $posts = Post::orderBy('created_at', 'DESC')->paginate(6);
-            return response()->json(["status" => false, "data" =>  $this->listPost($posts)], 200);
+            return response()->json(["status" => true, "data" =>  $data, "total" => Post::where('category_id', $Category->id)->count()], 200);
         }
         return response()->json(["status" => true, "data" =>  $this->listPost($posts)], 200);
     }
