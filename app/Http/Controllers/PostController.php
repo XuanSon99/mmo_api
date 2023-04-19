@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts =  Post::orderBy('created_at', 'DESC')->paginate(6);
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(6);
         return response()->json(["status" => true, "data" =>  $this->listPost($posts), "total" => Post::count()], 200);
     }
 
