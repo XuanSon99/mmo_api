@@ -66,6 +66,9 @@ class CategoryController extends Controller
             $list->image = $post->image;
             $list->slug = $post->slug;
             $list->title = $post->title;
+            $list->meta_description = $post->meta_description;
+            $list->meta_keywords = $post->meta_keywords;
+            $list->seo_title = $post->seo_title;
             array_push($data, $list);
         }
         return response()->json(["status" => true, "data" =>  $data, "total" => Post::where('category_id', $Category->id)->count()], 200);
