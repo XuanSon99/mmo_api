@@ -37,6 +37,9 @@ class PostController extends Controller
             $list->image = $post->image;
             $list->slug = $post->slug;
             $list->title = $post->title;
+            $list->meta_description = $post->meta_description;
+            $list->meta_keywords = $post->meta_keywords;
+            $list->seo_title = $post->seo_title;
             $list->id = $post->id;
             array_push($data, $list);
         }
@@ -124,6 +127,9 @@ class PostController extends Controller
         $list->status = $post->status;
         $list->title = $post->title;
         $list->featured = $post->featured;
+        $list->meta_description = $post->meta_description;
+        $list->meta_keywords = $post->meta_keywords;
+        $list->seo_title = $post->seo_title;
         return $list;
     }
 
