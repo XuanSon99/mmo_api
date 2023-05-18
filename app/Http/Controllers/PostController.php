@@ -84,6 +84,8 @@ class PostController extends Controller
             'title' => $request->title,
             'body' => $request->body,
             'slug' => $request->slug,
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
             'image' => str_replace("public", "", $image),
             'featured' => $request->featured,
             'status' => "PUBLISHED",
