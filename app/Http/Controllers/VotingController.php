@@ -35,6 +35,7 @@ class VotingController extends Controller
 
     public function destroy(Voting $Voting)
     {
+        $Voting->delete();
         return response()->json(["status" => true], 200);
     }
 }
