@@ -29,7 +29,8 @@ class VotingController extends Controller
 
     public function update(Request $request, Voting $Voting)
     {
-        $Voting->update($request->all());
+        // $Voting->update($request->all());
+        Voting::orderBy('created_at', 'DESC')->where('username', $Voting->username)->first()->update($request->all());
         return response()->json(["status" => true], 200);
     }
 
