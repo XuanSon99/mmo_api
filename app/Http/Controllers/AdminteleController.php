@@ -11,10 +11,10 @@ class AdminteleController extends Controller
     public function isAdmin(Request $request)
     {
         $username = $request->route('username');
-        $user = Admintele::orderBy('created_at', 'DESC')->where('username', $username)->first();
+        $user = Admintele::where('username', $username)->first();
         if($user){
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 }
