@@ -11,6 +11,10 @@ class AdminteleController extends Controller
     public function isAdmin(Request $request)
     {
         $username = $request->route('username');
-        return Admintele::where('username', $username)->first();
+        $user = Admintele::where('username', $username)->first();
+        if($user){
+            return true;
+        }
+        return false;
     }
 }
