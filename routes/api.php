@@ -49,7 +49,7 @@ Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('search', 'App\Http\Controllers\PostController@search');
 
 Route::resource('voting', 'App\Http\Controllers\VotingController');
-Route::get('isadmin/{username}', 'App\Http\Controllers\AdminteleController@isAdminController');
+Route::get('isadmin/{username}', 'App\Http\Controllers\AdminteleController@isAdmin');
 Route::get('votings/{username}', 'App\Http\Controllers\VotingController@getVotedList');
 
 Route::group([
