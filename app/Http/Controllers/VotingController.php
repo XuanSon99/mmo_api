@@ -8,7 +8,7 @@ use Validator;
 
 class VotingController extends Controller
 {
-    public function getVotedList(Request $request)
+    public function getInfo(Request $request)
     {
         $username = $request->route('username');
         return Voting::orderBy('created_at', 'DESC')->where('username', $username)->first();
@@ -20,7 +20,8 @@ class VotingController extends Controller
             'username' => $request->username,
             'start_time' => $request->start_time,
             'voted_user' => $request->voted_user,
-            'percent' => $request->percent
+            'percent' => $request->percent,
+            'msg_id' => $request->msg_id
         ]);
         $data->save();
 
