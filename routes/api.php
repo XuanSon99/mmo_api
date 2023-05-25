@@ -51,6 +51,7 @@ Route::get('search', 'App\Http\Controllers\PostController@search');
 Route::resource('voting', 'App\Http\Controllers\VotingController');
 Route::get('isadmin/{username}', 'App\Http\Controllers\AdminteleController@isAdmin');
 Route::get('votings/{username}', 'App\Http\Controllers\VotingController@getInfo');
+Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
 
 Route::group([
     'middleware' => 'auth:admin'
@@ -60,6 +61,5 @@ Route::group([
     Route::post('upload', 'App\Http\Controllers\PostController@uploadImage');
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
-    Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
     Route::post('send-message', 'App\Http\Controllers\ClientController@sendMessWithBot');
 });
