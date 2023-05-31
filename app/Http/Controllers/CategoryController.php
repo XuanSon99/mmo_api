@@ -27,6 +27,7 @@ class CategoryController extends Controller
                 $list->id = $cate->id;
                 $list->name = $cate->name;
                 $list->slug = $cate->slug;
+                $list->created_at = $cate->created_at;
                 array_push($data, $list);
             }
         }

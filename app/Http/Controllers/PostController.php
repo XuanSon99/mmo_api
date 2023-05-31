@@ -21,6 +21,10 @@ class PostController extends Controller
         return response()->json(["status" => true, "data" =>  $this->listPost($posts), "total" => Post::count()], 200);
     }
 
+    public function getAllPost(){
+        return Post::orderBy('created_at', 'DESC')->select('slug','created_at')->get();
+    }
+
     public function listPost($posts)
     {
         $data = array();

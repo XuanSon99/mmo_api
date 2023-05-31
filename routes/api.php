@@ -47,6 +47,7 @@ Route::resource('posts', 'App\Http\Controllers\PostController');
 Route::resource('categories', 'App\Http\Controllers\CategoryController');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('search', 'App\Http\Controllers\PostController@search');
+Route::get('all-post', 'App\Http\Controllers\PostController@getAllPost');
 
 Route::resource('voting', 'App\Http\Controllers\VotingController');
 Route::get('isadmin/{username}', 'App\Http\Controllers\AdminteleController@isAdmin');
