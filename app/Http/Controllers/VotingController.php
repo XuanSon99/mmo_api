@@ -45,7 +45,7 @@ class VotingController extends Controller
     public function updateRep(Request $request)
     {
         $client = Client::where('username', $request->username)->first();
-        Client::where('username', $request->username)->update([ 'transaction' => $client->transaction + 1])
+        Client::where('username', $request->username)->update([ 'transaction' => $client->transaction + 1]);
     }
 
     public function addUser(Request $request)
@@ -63,7 +63,7 @@ class VotingController extends Controller
             'reputation' => "no",
             'transaction' => 0,
         ]);
-        
+
         $data->save();
     }
 }
