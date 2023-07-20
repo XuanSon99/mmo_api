@@ -54,6 +54,9 @@ Route::get('isadmin/{username}', 'App\Http\Controllers\AdminteleController@isAdm
 Route::get('votings/{username}', 'App\Http\Controllers\VotingController@getInfo');
 Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUserInfo');
 
+Route::post('update-rep', 'App\Http\Controllers\VotingController@updateRep');
+Route::post('add-user', 'App\Http\Controllers\VotingController@addUser');
+
 Route::group([
     'middleware' => 'auth:admin'
 ], function () {

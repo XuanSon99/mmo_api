@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Voting;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -39,5 +40,30 @@ class VotingController extends Controller
     {
         $Voting->delete();
         return response()->json(["status" => true], 200);
+    }
+
+    public function updateRep(Request $request)
+    {
+        $client = Client::where('username', $request->username)->first();
+        Client::where('username', $request->username)->update([ 'transaction' => $client->transaction + 1])
+    }
+
+    public function addUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|unique:clients',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["status" => false, "message" => ["Yêu cầu đã được gửi!"]], 400);
+        }
+
+        $data = new Client([
+            'username' => $request->username,
+            'reputation' => "no",
+            'transaction' => 0,
+        ]);
+        
+        $data->save();
     }
 }
