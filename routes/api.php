@@ -18,6 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::resource('funding', 'App\Http\Controllers\FundingController');
+
 Route::post('kyc', 'App\Http\Controllers\ClientController@addKyc');
 Route::post('captcha', 'App\Http\Controllers\ClientController@addCaptcha');
 Route::get('get-top', 'App\Http\Controllers\ClientController@getTop');
