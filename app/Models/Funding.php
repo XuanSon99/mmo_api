@@ -11,6 +11,6 @@ class Funding extends Model
     protected $guarded = [];
     public function getRouteKeyName()
     {
-        return 'username';
+        return 'chat_id';
     }
 }

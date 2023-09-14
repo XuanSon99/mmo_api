@@ -31,6 +31,11 @@ class FundingController extends Controller
         $data->save();
     }
 
+    public function show(Funding $Funding)
+    {
+        return $Funding->paid;
+    }
+
     public function update(Request $request, Funding $Funding)
     {
         $Funding->update($request->all());
