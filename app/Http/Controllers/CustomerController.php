@@ -27,6 +27,7 @@ class CustomerController extends Controller
         }
 
         $data = new Customer([
+            'name' => $request->name,
             'account' => $request->account,
             'refferal' => $request->refferal,
             'agency' => $request->agency
@@ -44,6 +45,12 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $Customer)
     {
         $Customer->update($request->all());
+        return response()->json(["status" => true], 200);
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
         return response()->json(["status" => true], 200);
     }
 
