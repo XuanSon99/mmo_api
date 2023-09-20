@@ -13,7 +13,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return Customer::orderBy('created_at', 'DESC')->get();
+        return Customer::orderBy('created_at', 'DESC')->paginate(10);
     }
 
     public function store(Request $request)
@@ -45,5 +45,11 @@ class CustomerController extends Controller
     {
         $Customer->update($request->all());
         return response()->json(["status" => true], 200);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        return Customer::where('account', 'like', "%{$query}%")->get();
     }
 }

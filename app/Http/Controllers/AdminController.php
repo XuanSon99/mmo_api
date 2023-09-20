@@ -89,4 +89,13 @@ class AdminController extends Controller
             )->toDateTimeString()
         ]);
     }
+
+    public function getOverview()
+    {
+        $list = new \stdClass();
+        $list->new_user = Customer::whereDate('created_at', Carbon::today())->count();
+        $list->total_user = Customer::All()->count();
+
+        return $list;
+    }
 }

@@ -59,12 +59,19 @@ Route::get('user-info/{username}', 'App\Http\Controllers\ClientController@getUse
 Route::post('update-rep', 'App\Http\Controllers\VotingController@updateRep');
 Route::post('add-user', 'App\Http\Controllers\VotingController@addUser');
 
-Route::resource('admin', 'App\Http\Controllers\AdminController');
-
 Route::group([
     'middleware' => 'auth:admin'
 ], function () {
+    Route::resource('admin', 'App\Http\Controllers\AdminController');
     Route::resource('customer', 'App\Http\Controllers\CustomerController');
     Route::resource('profit', 'App\Http\Controllers\ProfitController');
     Route::get('update-money', 'App\Http\Controllers\ClientController@updateBrokerageMoney');
+    Route::get('overview', 'App\Http\Controllers\AdminController@getOverview');
+
+    Route::group([
+        'prefix' => 'search'
+    ], function () {
+        Route::get('customers', 'App\Http\Controllers\CustomerController@search');
+    });
+
 });
