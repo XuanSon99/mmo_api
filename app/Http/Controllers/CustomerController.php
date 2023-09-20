@@ -48,9 +48,9 @@ class CustomerController extends Controller
         return response()->json(["status" => true], 200);
     }
 
-    public function destroy(Post $post)
+    public function destroy(Customer $Customer)
     {
-        $post->delete();
+        $Customer->delete();
         return response()->json(["status" => true], 200);
     }
 
