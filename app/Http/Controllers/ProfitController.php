@@ -46,7 +46,7 @@ class ProfitController extends Controller
 
         foreach ($customers as $cus) {
             $customer = Profit::where('account', $cus->account)->whereMonth('date', '=', date('m'))->first();
-            return  $customer;
+            return date('m');
             $customer->update([
                 'brokerage_money' => 0
             ]);
