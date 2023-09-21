@@ -67,7 +67,7 @@ class ProfitController extends Controller
                     $f0_profit->update([
                         'brokerage_money' => $money * 3 / 10
                     ]);
-                    return
+                    return;
                 }
             } 
         }
