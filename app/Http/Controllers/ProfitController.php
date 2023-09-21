@@ -46,9 +46,12 @@ class ProfitController extends Controller
 
         foreach ($customers as $cus) {
             $customer = Profit::where('account', $cus->account)->whereMonth('date', '=', date('m'))->first();
-            $customer->update([
-                'brokerage_money' => 0
-            ]);
+
+            if ($customer) {
+                $customer->update([
+                    'brokerage_money' => 0
+                ]);
+            }
         }
 
         foreach ($customers as $cus) {
@@ -56,8 +59,6 @@ class ProfitController extends Controller
             $money = ($customer->profit / 5 +  $customer->commission) / 2;
 
             $f1_profit = Profit::where('account', $cus->refferal)->whereMonth('date', '=', date('m'))->first();
-
-            return $f1_profit;
 
             if ($f1_profit) {
                 $f1_profit->update([
@@ -75,7 +76,7 @@ class ProfitController extends Controller
                         'brokerage_money' => $f0_profit->brokerage_money + $money * 3 / 10
                     ]);
                 }
-            } 
+            }
         }
     }
 }
