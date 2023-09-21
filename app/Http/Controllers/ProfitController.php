@@ -63,11 +63,11 @@ class ProfitController extends Controller
             if ($f1_customer) {
                 $f0_profit = Profit::where('account', $f1_customer->refferal)->first();
 
-                return $f0_profit;
                 if ($f0_profit) {
                     $f0_profit->update([
                         'brokerage_money' => $money * 3 / 10
                     ]);
+                    return
                 }
             } 
         }
