@@ -46,7 +46,7 @@ class ProfitController extends Controller
 
         foreach ($customers as $cus) {
             $money = ($cus->profit / 5 +  $cus->commission) / 2;
-            return  $money;
+            return  $cus->profit;
 
             $f1_profit = Profit::where('account', $cus->refferal)->first();
 
