@@ -56,7 +56,10 @@ class ProfitController extends Controller
 
         foreach ($customers as $cus) {
             $customer = Profit::where('account', $cus->account)->whereMonth('date', '=', date('m'))->first();
-            $money = ($customer->profit / 5 +  $customer->commission) / 2;
+
+            if($customer){
+                $money = ($customer->profit / 5 +  $customer->commission) / 2;
+            }
 
             $f1_profit = Profit::where('account', $cus->refferal)->whereMonth('date', '=', date('m'))->first();
 
