@@ -49,11 +49,10 @@ class ProfitController extends Controller
 
             $f1_profit = Profit::where('account', $cus->refferal)->first();
 
-            return $f1_profit;
 
             if ($f1_profit) {
                 $f1_profit->update([
-                    'brokerage_money' => $f1_profit->brokerage_money + $money * 7 / 10
+                    'brokerage_money' => 10
                 ]);
             }
 
