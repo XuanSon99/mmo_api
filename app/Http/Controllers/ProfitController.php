@@ -58,6 +58,8 @@ class ProfitController extends Controller
 
             $f1_customer = Customer::where('account', $cus->refferal)->first();
 
+            return $f1_customer;
+
             if ($f1_customer) {
                 $f0_profit = Profit::where('account', $f1_customer->refferal)->first();
 
