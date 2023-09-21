@@ -45,8 +45,8 @@ class ProfitController extends Controller
         $customers = Customer::orderBy('created_at', 'DESC')->get();
 
         foreach ($customers as $cus) {
-            $money = ($cus->profit / 5 +  $cus->commission) / 2;
-            return  $cus;
+            $customer = Profit::where('account', $cus->account)->first();
+            $money = ($customer->profit / 5 +  $customer->commission) / 2;
 
             $f1_profit = Profit::where('account', $cus->refferal)->first();
 
