@@ -58,7 +58,7 @@ class ProfitController extends Controller
         $customers = Customer::orderBy('created_at', 'DESC')->get();
 
         foreach ($customers as $cus) {
-            $customer = Profit::where('account', $cus->account)->where('balance', '>=', 500)->whereMonth('date', '=', date('m'))->first();
+            $customer = Profit::where('account', $cus->account)->whereMonth('date', '=', date('m'))->first();
 
             if ($customer) {
                 $customer->update([
