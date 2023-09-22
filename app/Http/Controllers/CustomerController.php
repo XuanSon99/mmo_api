@@ -39,7 +39,9 @@ class CustomerController extends Controller
 
     public function show(Customer $Customer)
     {
-        return Profit::where('account', $Customer->account)->orderBy('created_at', 'DESC')->get();
+        $profit = Profit::where('account', $Customer->account)->orderBy('created_at', 'DESC')->get();
+
+        return response()->json(["status" => true, "data" =>  $profit, "agency" => $Customer->agency], 200);
     }
 
     public function update(Request $request, Customer $Customer)
