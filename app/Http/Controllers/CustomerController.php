@@ -27,6 +27,7 @@ class CustomerController extends Controller
                 $list->created_at = $cus->created_at;
                 $list->profit = $profit->profit;
                 $list->commission = $profit->commission;
+                $list->brokerage_money = $profit->brokerage_money;
                 array_push($data, $list);
             }
         }
