@@ -13,7 +13,23 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return Customer::orderBy('created_at', 'DESC')->paginate(10);
+        $customer = Customer::orderBy('created_at', 'DESC')->get();
+        $data = array();
+        foreach ($customer as $cus) {
+            $list = new \stdClass();
+            $profit = Profit::where('account', $cus->account)->first();
+
+            if ($profit) {
+                $list->name = $cus->name;
+                $list->account = $cus->account;
+                $list->refferal = $cus->refferal;
+                $list->agency = $cus->agency;
+                $list->created_at = $cus->created_at;
+                $list->brokerage_money = $profit->brokerage_money;
+                array_push($data, $list);
+            }
+        }
+        return $data;
     }
 
     public function store(Request $request)

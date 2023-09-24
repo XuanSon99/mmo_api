@@ -13,21 +13,20 @@ class ProfitController extends Controller
 {
     public function index()
     {
-        return Profit::orderBy('date', 'DESC')->get();
+        return Profit::orderBy('created_at', 'DESC')->get();
     }
 
     public function store(Request $request)
     {
-        $profit = Profit::where('account', $request->account)->whereMonth('date', '=', date('m'))->first();
+        $profit = Profit::where('account', $request->account)->first();
 
         if ($profit) {
-            return response()->json(["status" => false, "message" => ["Tài khoản đã có lợi nhuận tháng " . date('m')]], 400);
+            $profit->delete();
         }
 
         $data = new Profit([
             'account' => $request->account,
             'balance' => $request->balance,
-            'date' => $request->date,
             'profit' => $request->profit,
             'commission' => $request->commission
         ]);
@@ -58,7 +57,7 @@ class ProfitController extends Controller
         $customers = Customer::orderBy('created_at', 'DESC')->get();
 
         foreach ($customers as $cus) {
-            $customer = Profit::where('account', $cus->account)->whereMonth('date', '=', date('m'))->first();
+            $customer = Profit::where('account', $cus->account)->first();
 
             if ($customer) {
                 $customer->update([
@@ -68,7 +67,7 @@ class ProfitController extends Controller
         }
 
         foreach ($customers as $cus) {
-            $customer = Profit::where('account', $cus->account)->whereMonth('date', '=', date('m'))->first();
+            $customer = Profit::where('account', $cus->account)->first();
 
             if ($customer) {
                 $money = ($customer->profit / 5 +  $customer->commission) / 2;
@@ -76,7 +75,7 @@ class ProfitController extends Controller
                 continue;
             }
 
-            $f1_profit = Profit::where('account', $cus->refferal)->where('balance', '>=', 500)->whereMonth('date', '=', date('m'))->first();
+            $f1_profit = Profit::where('account', $cus->refferal)->where('balance', '>=', 500)->first();
             $f1_customer = Customer::where('account', $cus->refferal)->first();
 
             if ($f1_profit) {
@@ -92,7 +91,7 @@ class ProfitController extends Controller
             }
 
             if ($f1_customer) {
-                $f0_profit = Profit::where('account', $f1_customer->refferal)->where('balance', '>=', 500)->whereMonth('date', '=', date('m'))->first();
+                $f0_profit = Profit::where('account', $f1_customer->refferal)->where('balance', '>=', 500)->first();
 
                 if ($f0_profit) {
                     $f0_profit->update([
