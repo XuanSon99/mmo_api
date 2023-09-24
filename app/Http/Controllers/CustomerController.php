@@ -25,7 +25,8 @@ class CustomerController extends Controller
                 $list->refferal = $cus->refferal;
                 $list->agency = $cus->agency;
                 $list->created_at = $cus->created_at;
-                $list->brokerage_money = $profit->brokerage_money;
+                $list->profit = $profit->profit;
+                $list->commission = $profit->commission;
                 array_push($data, $list);
             }
         }
