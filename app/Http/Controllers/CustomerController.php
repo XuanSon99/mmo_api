@@ -18,18 +18,17 @@ class CustomerController extends Controller
         foreach ($customer as $cus) {
             $list = new \stdClass();
             $profit = Profit::where('account', $cus->account)->first();
-
+            $list->name = $cus->name;
+            $list->account = $cus->account;
+            $list->refferal = $cus->refferal;
+            $list->agency = $cus->agency;
+            $list->created_at = $cus->created_at;
             if ($profit) {
-                $list->name = $cus->name;
-                $list->account = $cus->account;
-                $list->refferal = $cus->refferal;
-                $list->agency = $cus->agency;
-                $list->created_at = $cus->created_at;
                 $list->profit = $profit->profit;
                 $list->commission = $profit->commission;
                 $list->brokerage_money = $profit->brokerage_money;
-                array_push($data, $list);
             }
+            array_push($data, $list);
         }
         return $data;
     }
