@@ -70,7 +70,7 @@ class ProfitController extends Controller
             $customer = Profit::where('account', $cus->account)->first();
 
             if ($customer) {
-                $money = ($customer->profit - $customer->commission) / 5 +  $customer->commission / 4;
+                $money = ($customer->profit - $customer->commission) / 10 +  $customer->commission / 4;
             } else {
                 continue;
             }
