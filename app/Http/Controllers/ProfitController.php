@@ -26,7 +26,6 @@ class ProfitController extends Controller
 
         $data = new Profit([
             'account' => $request->account,
-            'balance' => $request->balance,
             'profit' => $request->profit,
             'commission' => $request->commission
         ]);
@@ -75,7 +74,7 @@ class ProfitController extends Controller
                 continue;
             }
 
-            $f1_profit = Profit::where('account', $cus->refferal)->where('balance', '>=', 500)->first();
+            $f1_profit = Profit::where('account', $cus->refferal)->first();
             $f1_customer = Customer::where('account', $cus->refferal)->first();
 
             if ($f1_profit) {
@@ -91,7 +90,7 @@ class ProfitController extends Controller
             }
 
             if ($f1_customer) {
-                $f0_profit = Profit::where('account', $f1_customer->refferal)->where('balance', '>=', 500)->first();
+                $f0_profit = Profit::where('account', $f1_customer->refferal)->first();
 
                 if ($f0_profit) {
                     $f0_profit->update([

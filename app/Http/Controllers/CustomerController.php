@@ -24,7 +24,6 @@ class CustomerController extends Controller
             $list->agency = $cus->agency;
             $list->created_at = $cus->created_at;
             if ($profit) {
-                $list->balance = $profit->balance;
                 $list->profit = $profit->profit;
                 $list->commission = $profit->commission;
                 $list->brokerage_money = $profit->brokerage_money;
